@@ -86,8 +86,7 @@ const THEME_KEY = 'portfolio-theme';
 function getPreferredTheme() {
     const saved = localStorage.getItem(THEME_KEY);
     if (saved) return saved;
-    // Default to dark if user prefers dark mode at OS level
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return 'dark';
 }
 
 function applyTheme(theme) {
@@ -247,37 +246,42 @@ function initProjectFilters() {
 function initContactForm() {
     if (!contactForm) return;
 
+    const submitBtn = document.getElementById('submit-btn');
+    const submitText = document.getElementById('submit-text');
+
     contactForm.addEventListener('submit', (e) => {
-        // Allow native FormSubmit submission
-        // Show sending status before redirect
+        e.preventDefault();
+
         formStatus.textContent = 'Sending your message...';
         formStatus.className = 'form-status';
 
-        // FormSubmit will redirect after submission
-        // For AJAX-style feedback, uncomment below and prevent default:
-        /*
-        e.preventDefault();
+        if (submitBtn) submitBtn.disabled = true;
+        if (submitText) submitText.textContent = 'Sending...';
+
         const formData = new FormData(contactForm);
 
         fetch(contactForm.action, {
             method: 'POST',
             body: formData,
-            headers: { 'Accept': 'application/json' }
+            headers: { Accept: 'application/json' }
         })
-        .then(response => {
-            if (response.ok) {
+            .then((response) => {
+                if (response.ok) return response.json();
+                throw new Error('Form submission failed');
+            })
+            .then(() => {
                 formStatus.textContent = 'Message sent successfully! I\'ll get back to you soon.';
                 formStatus.className = 'form-status success';
                 contactForm.reset();
-            } else {
-                throw new Error('Form submission failed');
-            }
-        })
-        .catch(() => {
-            formStatus.textContent = 'Something went wrong. Please try again or email me directly.';
-            formStatus.className = 'form-status error';
-        });
-        */
+            })
+            .catch(() => {
+                formStatus.textContent = 'Something went wrong. Please try again or email me directly.';
+                formStatus.className = 'form-status error';
+            })
+            .finally(() => {
+                if (submitBtn) submitBtn.disabled = false;
+                if (submitText) submitText.textContent = 'Send Message';
+            });
     });
 }
 

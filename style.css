@@ -2,12 +2,12 @@
    CSS Variables — Light & Dark Theme Tokens
    ============================================ */
 :root {
-    /* Color Palette */
-    --primary: #6366f1;
-    --primary-dark: #4f46e5;
-    --primary-light: #818cf8;
-    --secondary: #06b6d4;
-    --accent: #f59e0b;
+    /* Color Palette — blue & emerald professional theme */
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --primary-light: #60a5fa;
+    --secondary: #10b981;
+    --accent: #06b6d4;
 
     /* Light Theme (default) */
     --bg-primary: #ffffff;
@@ -179,12 +179,12 @@ button {
 .btn-primary {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: #fff;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(99, 102, 241, 0.45);
+    box-shadow: 0 6px 25px rgba(59, 130, 246, 0.45);
 }
 
 .btn-outline {
@@ -202,6 +202,12 @@ button {
 .btn-sm {
     padding: 0.5rem 1rem;
     font-size: 0.8125rem;
+}
+
+.btn-primary:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .btn-full {
@@ -587,25 +593,43 @@ button {
     to { transform: rotate(360deg); }
 }
 
-.profile-placeholder {
+.profile-image-frame {
     position: relative;
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    overflow: hidden;
     background: var(--bg-card);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
     border: 4px solid var(--bg-secondary);
-    color: var(--text-muted);
-    font-size: 4rem;
+    box-shadow: 0 0 60px rgba(59, 130, 246, 0.25);
 }
 
-.profile-placeholder span {
-    font-size: 0.875rem;
-    font-weight: 500;
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform var(--transition-base);
+}
+
+.profile-wrapper:hover .profile-photo {
+    transform: scale(1.05);
+}
+
+.profile-badge {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--secondary);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
 }
 
 .scroll-indicator {
@@ -944,7 +968,7 @@ button {
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 0.25rem 0.75rem;
-    background: rgba(99, 102, 241, 0.1);
+    background: rgba(59, 130, 246, 0.1);
     color: var(--primary);
     border-radius: var(--radius-full);
     margin-bottom: 1rem;
@@ -1011,7 +1035,7 @@ button {
     align-items: center;
     justify-content: center;
     margin: 0 auto 1.25rem;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
     color: var(--primary);
     border-radius: var(--radius-md);
     font-size: 1.5rem;
@@ -1080,13 +1104,13 @@ button {
     border: 3px solid var(--bg-secondary);
     border-radius: 50%;
     transform: translateX(-7px);
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
     transition: all var(--transition-base);
 }
 
 .timeline-item:hover .timeline-dot {
     transform: translateX(-7px) scale(1.3);
-    box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.3);
 }
 
 .timeline-content {
@@ -1277,7 +1301,7 @@ button {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .form-group input::placeholder,
