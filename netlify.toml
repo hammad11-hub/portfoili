@@ -1,4 +1,6 @@
 [build]
   command = ""
 
-  publish = "frontend"
+[build]
+  publish = "."
+  
